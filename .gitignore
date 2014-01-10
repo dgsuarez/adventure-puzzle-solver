@@ -1,0 +1,14 @@
+pom.xml
+*jar
+/lib/
+/classes/
+/target/
+.lein-deps-sum
+.lein-failures
+.lein-env
+.lein-deps-sum
+.lein-repl-history
+.nrepl-port
+*.swp
+*.swo
+.lein-plugins/
