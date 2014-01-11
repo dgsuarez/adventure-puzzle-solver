@@ -30,3 +30,5 @@
                :when (and (>= nx 0) (>= ny 0))] 
            (swap-cells puzzle [x y] [nx ny])))))
 
+(defn make-solution [puzzle]
+  #(= puzzle %))
