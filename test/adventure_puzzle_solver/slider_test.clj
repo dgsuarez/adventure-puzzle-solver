@@ -10,6 +10,13 @@
                        [4 2 5]
                        [7 8 9]])
 
+(def weird [[4 1 0] 
+            [2 3 5] 
+            [7 8 9]])
+
+(deftest with-once-failing
+  (is (every? identity (flatten (seq (possible-next-steps weird))))))
+
 (deftest generating-next-steps
   (is (= (count (possible-next-steps puzzle)) 4))
   (is (contains? (possible-next-steps puzzle) one-in-next-step))

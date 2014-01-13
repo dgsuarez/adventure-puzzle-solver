@@ -27,7 +27,7 @@
         new-coords (map (fn [[dx dy]] 
                           [(+ x dx) (+ y dy)]) moves)]
     (set (for [[nx ny] new-coords 
-               :when (and (>= nx 0) (>= ny 0))] 
+               :when (get-cell puzzle [nx ny])] 
            (swap-cells puzzle [x y] [nx ny])))))
 
 (defn make-solution [puzzle]
