@@ -10,7 +10,6 @@
       (conj current s))))
 
 (defn take-step [explored get-next-states]
-  (println (count (first explored)))
   (mapcat #(all-next % get-next-states) explored))
 
 (defn get-all-states [explored get-next-states]
