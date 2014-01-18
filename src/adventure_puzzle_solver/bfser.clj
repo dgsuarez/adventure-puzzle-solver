@@ -4,10 +4,9 @@
   (some #(= elm %) seq))
 
 (defn all-next [current get-next-states]
-  (let [next-states (get-next-states (first current))]
-    (for [s next-states
-          :when (not (in? current s))] 
-      (conj current s))))
+  (for [s (get-next-states (first current))
+    :when (not (in? current s))] 
+    (conj current s)))
 
 (defn take-step [explored get-next-states]
   (mapcat #(all-next % get-next-states) explored))
