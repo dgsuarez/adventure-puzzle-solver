@@ -5,15 +5,15 @@
 
 (def one-step [[1 2 3]
                [0 4 5]
-               [7 8 9]])
+               [6 7 8]])
 
 (def solution [[1 2 3]
                [4 0 5]
-               [7 8 9]])
+               [6 7 8]])
 
 (def initial [[4 1 3]
-              [2 8 5]
-              [7 0 9]])
+              [2 7 5]
+              [6 0 8]])
 
 (def solution-as-state (list (list solution)))
 
@@ -38,4 +38,4 @@
   (is (= (list one-step solution) (solve one-step is-slider-solution? possible-next-steps))))
 
 (deftest when-longer-steps-to-solution
- (solve initial is-slider-solution? possible-next-steps))
+ (is (= 6 (count (solve initial is-slider-solution? possible-next-steps)))))
