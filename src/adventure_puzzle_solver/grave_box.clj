@@ -39,5 +39,8 @@
                      :when (valid-move? puzzle from to)]
                  (move-cells puzzle from to))))
 
+(defn compare-states [a b]
+  (- (count (first a)) (count (filter identity (map = (get a 1) (get b 1))))))
+
 (defn scorer [solution current]
-  (- (count (first solution)) (count (filter identity (map = (get solution 1) (get (first current) 1))))))
+  [(compare-states solution (first current)) (count current)])

@@ -45,10 +45,9 @@
   (is (= 15 (count (possible-next-steps start)))))
 
 (deftest scorer-scores-right
-  (is (= 6 (scorer start (list end)))))
+  (is (= [6 1] (scorer end (list start)))))
 
 (deftest solve-it
-  (let [solution (solve start #{end} #(scorer end %) possible-next-steps)]
-    (println solution)
-    (println (count solution))))
+  (let [solution (time (solve start #{end} #(scorer end %) possible-next-steps))]
+    (is (= 115 (count solution)))))
 
