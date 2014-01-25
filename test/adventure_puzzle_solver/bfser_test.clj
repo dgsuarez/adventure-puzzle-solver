@@ -20,16 +20,16 @@
 (def is-slider-solution? (make-solution solution))
 
 (deftest when-getting-all-next-for-first-step
-  (is (= 4 (count (all-next (list solution) possible-next-steps)))))
+  (is (= 4 (count (all-next (list solution) (atom #{}) possible-next-steps)))))
 
 (deftest when-getting-more-next-already-there
-  (is (= 3 (count (all-next (list solution one-step) possible-next-steps)))))
+  (is (= 3 (count (all-next (list solution one-step) (atom #{one-step}) possible-next-steps)))))
 
 (deftest when-going-down-a-level
-  (is (= 4 (count (take-step solution-as-state possible-next-steps)))))
+  (is (= 4 (count (take-step solution-as-state (atom #{}) possible-next-steps)))))
 
 (deftest lazily-get-all-solutions
-  (is (= (list 1 2 2 2 2 3 3 3 3 3) (map count (take 10 (get-all-states solution-as-state possible-next-steps))))))
+  (is (= (list 1 2 2 2 2 3 3 3 3 3) (map count (take 10 (get-all-states solution-as-state (atom #{}) possible-next-steps))))))
 
 (deftest when-is-solution
   (is (= (list solution) (solve solution is-slider-solution? possible-next-steps))))
