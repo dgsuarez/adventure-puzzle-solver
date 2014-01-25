@@ -1,15 +1,15 @@
 (ns adventure-puzzle-solver.grave-box-test
   (:require [clojure.test :refer :all]
             [adventure-puzzle-solver.grave-box :refer :all]
-            [adventure-puzzle-solver.bfser :refer :all]))
+            [adventure-puzzle-solver.best-first :refer :all]))
 
 (def start [[0 0 0 0 0 0 0 0 0]
             [2 6 3 7 5 4 4 8 0]
             [0 0 0 0 0 0 0 0 0]])
 
-(def end [[0 0 0 0 0 0 0 0 0]
-          [7 8 2 3 5 4 6 4 0]
-          [0 0 0 0 0 0 0 0 0]])
+(def end   [[0 0 0 0 0 0 0 0 0]
+            [7 8 2 3 5 4 6 4 0]
+            [0 0 0 0 0 0 0 0 0]])
 
 (def small [[1 2 3 0]
             [4 5 0 0]
@@ -44,6 +44,11 @@
 (deftest all-moving-with-full
   (is (= 15 (count (possible-next-steps start)))))
 
-;(deftest solve-it
-  ;(println (solve start #{end} possible-next-steps)))
+(deftest scorer-scores-right
+  (is (= 6 (scorer start (list end)))))
+
+(deftest solve-it
+  (let [solution (solve start #{end} #(scorer end %) possible-next-steps)]
+    (println solution)
+    (println (count solution))))
 

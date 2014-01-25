@@ -39,3 +39,5 @@
                      :when (valid-move? puzzle from to)]
                  (move-cells puzzle from to))))
 
+(defn scorer [solution current]
+  (- (count (first solution)) (count (filter identity (map = (get solution 1) (get (first current) 1))))))
