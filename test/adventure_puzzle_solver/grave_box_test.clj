@@ -1,7 +1,7 @@
 (ns adventure-puzzle-solver.grave-box-test
   (:require [clojure.test :refer :all]
             [adventure-puzzle-solver.grave-box :refer :all]
-            [adventure-puzzle-solver.best-first :refer :all]))
+            [adventure-puzzle-solver.best-first :as best-first]))
 
 (def start [[0 0 0 0 0 0 0 0 0]
             [2 6 3 7 5 4 4 8 0]
@@ -48,6 +48,6 @@
   (is (= [6 1] (scorer end (list start)))))
 
 (deftest solve-it
-  (let [solution (time (solve start #{end} #(scorer end %) possible-next-steps))]
+  (let [solution (time (best-first/solve start #{end} #(scorer end %) possible-next-steps))]
     (is (= 115 (count solution)))))
 
