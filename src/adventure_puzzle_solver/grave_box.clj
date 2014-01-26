@@ -32,12 +32,12 @@
       (every? #{0} (cell-values puzzle unexplored)))))
 
 (defn possible-next-steps [puzzle]
-  (remove nil? (for [move #{[-1 0] [1 0] [0 1] [0 -1]}
-                     pair (pairs puzzle)
-                     :let [from (pair-cells pair)
-                           to (pair-cells (new-pair pair move))]
-                     :when (valid-move? puzzle from to)]
-                 (move-cells puzzle from to))))
+  (for [move '([-1 0] [1 0] [0 1] [0 -1])
+        pair (pairs puzzle)
+        :let [from (pair-cells pair)
+              to (pair-cells (new-pair pair move))]
+        :when (valid-move? puzzle from to)]
+    (move-cells puzzle from to)))
 
 (defn compare-states [a b]
   (- (count (first a)) (count (filter identity (map = (get a 1) (get b 1))))))
