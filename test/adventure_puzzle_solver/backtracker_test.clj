@@ -16,13 +16,11 @@
               [2 7 5]
               [6 0 8]])
 
-(def is-slider-solution? (make-solution solution))
-
 (deftest when-is-solution
-  (solve solution is-slider-solution? possible-next-steps))
+  (solve solution #{solution} possible-next-steps))
 
 (deftest when-one-step-to-solution
- (count (solve one-step is-slider-solution? possible-next-steps)))
+ (count (solve one-step #{solution} possible-next-steps)))
 
 (deftest when-longer-steps-to-solution
- (solve initial is-slider-solution? possible-next-steps))
+ (solve initial #{solution} possible-next-steps))

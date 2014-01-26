@@ -31,11 +31,6 @@
 (deftest detect-free-cells
   (is (= (free-cells puzzle) (list [1 1]))))
 
-(deftest is-solution 
-  (let [solution? (make-solution puzzle)]
-    (is (solution? puzzle))
-    (is (not (solution? one-in-next-step)))))
-
 (deftest scores-right
   (is (= [2 1] (scorer puzzle (list one-in-next-step)))))
 

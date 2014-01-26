@@ -17,8 +17,6 @@
 
 (def solution-as-state (list (list solution)))
 
-(def is-slider-solution? (make-solution solution))
-
 (deftest when-getting-all-next-for-first-step
   (is (= 4 (count (all-next (list solution) (atom #{}) possible-next-steps)))))
 
@@ -32,10 +30,10 @@
   (is (= (list 1 2 2 2 2 3 3 3 3 3) (map count (take 10 (get-all-states solution-as-state (atom #{}) possible-next-steps))))))
 
 (deftest when-is-solution
-  (is (= (list solution) (solve solution is-slider-solution? possible-next-steps))))
+  (is (= (list solution) (solve solution #{solution} possible-next-steps))))
 
 (deftest when-one-step-to-solution
-  (is (= (list one-step solution) (solve one-step is-slider-solution? possible-next-steps))))
+  (is (= (list one-step solution) (solve one-step #{solution} possible-next-steps))))
 
 (deftest when-longer-steps-to-solution
- (is (= 6 (count (solve initial is-slider-solution? possible-next-steps)))))
+ (is (= 6 (count (solve initial #{solution} possible-next-steps)))))

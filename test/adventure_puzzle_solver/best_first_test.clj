@@ -20,10 +20,8 @@
 (defn qish-scorer [solution]
   (count solution))
 
-(def is-slider-solution? (make-solution solution))
-
 (deftest adding-states-to-the-queue 
   (is (= 4 (count (explore-next-state (list solution) (priority-map) (atom #{}) qish-scorer possible-next-steps)))))
 
 (deftest get-a-solution
-  (is (= 6 (count (solve initial is-slider-solution? qish-scorer possible-next-steps)))))
+  (is (= 6 (count (solve initial #{solution} qish-scorer possible-next-steps)))))

@@ -18,9 +18,6 @@
                :when (get-cell puzzle [nx ny])] 
            (swap-cells puzzle [x y] [nx ny])))))
 
-(defn make-solution [puzzle]
-  #(#{puzzle} %))
-
 (defn compare-states [a b]
   (- (count (flatten a)) (count (filter identity (map = (flatten a) (flatten b))))))
 
