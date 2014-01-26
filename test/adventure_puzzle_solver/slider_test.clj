@@ -20,6 +20,10 @@
               [2 7 5]
               [6 0 8]])
 
+(def from-still-life [[8 5 4]
+                      [2 0 6]
+                      [3 1 7]])
+
 (deftest with-once-failing
   (is (every? identity (flatten (seq (possible-next-steps weird))))))
 
@@ -38,3 +42,9 @@
   (let [best-first-sol (time (best-first/solve initial #{puzzle} #(scorer puzzle %) possible-next-steps))
         bfser-sol (time (bfser/solve initial #{puzzle} possible-next-steps))]
     (is (= bfser-sol best-first-sol))))
+
+(deftest solve-still-life
+  (let [best-first-sol (time (best-first/solve from-still-life #{puzzle} #(scorer puzzle %) possible-next-steps))
+        bfser-sol (time (bfser/solve from-still-life #{puzzle} possible-next-steps))]
+    (is (apply = (map #(vector (first %) (last %)) [best-first-sol bfser-sol])))))
+
