@@ -29,11 +29,11 @@
 
 (deftest generating-next-steps
   (is (= (count (possible-next-steps puzzle)) 4))
-  (is (contains? (possible-next-steps puzzle) one-in-next-step))
+  (is (contains? (set (possible-next-steps puzzle)) one-in-next-step))
   (is (= (count (possible-next-steps one-in-next-step)) 3)))
 
 (deftest detect-free-cells
-  (is (= (free-cells puzzle) (list [1 1]))))
+  (is (= (free-cell puzzle) [1 1])))
 
 (deftest scores-right
   (is (= [2 1] (scorer puzzle (list one-in-next-step)))))
