@@ -19,4 +19,10 @@
            (swap-cells puzzle [x y] [nx ny])))))
 
 (defn make-solution [puzzle]
-  #(= puzzle %))
+  #(#{puzzle} %))
+
+(defn compare-states [a b]
+  (- (count (flatten a)) (count (filter identity (map = (flatten a) (flatten b))))))
+
+(defn scorer [solution current]
+  [(compare-states solution (first current)) (count current)])
