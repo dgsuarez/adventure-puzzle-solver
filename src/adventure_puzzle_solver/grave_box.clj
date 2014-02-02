@@ -17,13 +17,13 @@
   [pair [(first pair) (+ 1 (last pair))]])
 
 (defn cell-values [puzzle cells]
-  (map #(get-cell puzzle %) cells))
+  (map #(get-in puzzle %) cells))
 
 (defn move-cells [puzzle from to]
   (let [new-froms (map vector from '(0 0))
         new-tos (map vector to (cell-values puzzle from))
         new-to-set (concat new-froms new-tos)]
-    (reduce #(apply assoc-cell %1 %2) puzzle new-to-set)))
+    (reduce #(apply assoc-in %1 %2) puzzle new-to-set)))
 
 (defn valid-move? [puzzle from to]
   (let [unexplored (clojure.set/difference (set to) (set from))]

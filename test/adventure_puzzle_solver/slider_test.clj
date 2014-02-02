@@ -24,6 +24,12 @@
                       [2 0 6]
                       [3 1 7]])
 
+(deftest swaping-cells
+  (is (= (swap-cells puzzle [0 1] [1 1])
+         [[1 0 3]
+          [4 2 5]
+          [6 7 8]])))
+
 (deftest with-once-failing
   (is (every? identity (flatten (seq (possible-next-steps weird))))))
 
