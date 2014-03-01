@@ -33,10 +33,9 @@
 (defn rec-split-cake [original-spec state]
   (if (done? state) 
     state
-    (first (remove nil? (map #(rec-split-cake original-spec %) 
-                             (chunks-from (update-spec original-spec state)))))))
+    (some identity (map #(rec-split-cake original-spec %) 
+                        (chunks-from (update-spec original-spec state))))))
 
 (defn split-cake [state]
   (rec-split-cake (:spec state) (update-position '(0 0) state)))
-
 
