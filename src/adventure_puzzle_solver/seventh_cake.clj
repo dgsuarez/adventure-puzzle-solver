@@ -2,6 +2,12 @@
   (:require [clojure.set]
             [adventure-puzzle-solver.core :refer :all]))
 
+(defn get-starting-piece-number [{cake :cake}]
+  (->> cake
+      flatten
+      (apply max)
+      inc))
+
 (defn update-position [pos state]
   (let [{:keys [cake piece-num spec]} state]
     (merge state {:cake (assoc-in cake pos piece-num)
@@ -37,5 +43,9 @@
                         (chunks-from (update-spec (:spec original-state) state))))))
 
 (defn split-cake [state]
-  (rec-split-cake state (update-position '(0 0) state)))
+  (let [working-state (assoc-in state [:piece-num] (get-starting-piece-number state))]
+    (rec-split-cake working-state (update-position '(0 0) working-state))))
+
+(defn solve [initial]
+  (:cake (split-cake initial)))
 

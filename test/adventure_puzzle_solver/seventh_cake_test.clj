@@ -38,4 +38,5 @@
   (is (not (full-piece? {:spec {1 2}}))))
 
 (deftest it-finds-a-solution 
-  (is (= solution (:cake (split-cake state)))))
+  (is (= solution (solve {:spec spec, :cake cake}))))
+
