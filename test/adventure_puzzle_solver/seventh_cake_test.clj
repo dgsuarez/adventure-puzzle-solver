@@ -1,6 +1,7 @@
 (ns adventure-puzzle-solver.seventh-cake-test
   (:require [clojure.test :refer :all]
-            [adventure-puzzle-solver.seventh-cake :refer :all]))
+            [adventure-puzzle-solver.seventh-cake :refer :all]
+            [adventure-puzzle-solver.backtracker :as backtracker]  ))
 
 (def cake [[1 2 2 1 2 1]
            [0 2 1 1 2 1] 
@@ -30,7 +31,7 @@
   (is (= '((1 0)) (valid-next (assoc-in state [:spec] {0 1})))))
 
 (deftest it-gets-a-single-chunk-for-a-piece
-  (let [state (first (chunks-from state))]
+  (let [state (first (get-next-states state state))]
     (is (= (:spec state) {0 0, 1 2, 2 2}))
     (is (= (:last-pos state) [1 0]))
     (is (= (get-in (:cake state) [1 0]) 3))))
@@ -40,5 +41,9 @@
   (is (not (full-piece? {:spec {1 2}}))))
 
 (deftest it-finds-a-solution 
-  (is (= solution (solve 6 cake))))
+  (let [initial (build-initial-state 6 cake)
+        solution? (build-solution-checker 6 cake)
+        get-next-states (build-get-next-states 6 cake)
+        ]
+   (is (= solution (-> (backtracker/solve initial solution? get-next-states) first :cake)))))
 
