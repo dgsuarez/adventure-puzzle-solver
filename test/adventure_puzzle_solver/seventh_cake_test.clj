@@ -1,7 +1,6 @@
 (ns adventure-puzzle-solver.seventh-cake-test
   (:require [clojure.test :refer :all]
-            [adventure-puzzle-solver.seventh-cake :refer :all]
-            [adventure-puzzle-solver.best-first :as best-first]))
+            [adventure-puzzle-solver.seventh-cake :refer :all]))
 
 (def cake [[1 2 2 1 2 1]
            [0 2 1 1 2 1] 
