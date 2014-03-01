@@ -21,6 +21,9 @@
             :spec spec
             :piece-num 3})
 
+(deftest it-should-get-a-spec-from-num-pieces-and-cake
+  (is (= (get-spec 6 cake) spec)))
+
 (deftest it-should-get-valid-next-chunks
   (is (= '((1 0) (0 1)) (valid-next state)))
   (is (= '() (valid-next (assoc-in state [:spec] {}))))
@@ -37,5 +40,5 @@
   (is (not (full-piece? {:spec {1 2}}))))
 
 (deftest it-finds-a-solution 
-  (is (= solution (solve {:spec spec, :cake cake}))))
+  (is (= solution (solve 6 cake))))
 

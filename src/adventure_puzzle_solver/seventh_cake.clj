@@ -46,6 +46,9 @@
   (let [working-state (assoc-in state [:piece-num] (get-starting-piece-number state))]
     (rec-split-cake working-state (update-position '(0 0) working-state))))
 
-(defn solve [initial]
-  (:cake (split-cake initial)))
+(defn get-spec [pieces cake]
+  (into {} (map #(vector (first %) (-> % last count (/ pieces))) (group-by identity (flatten cake)))))
+
+(defn solve [pieces cake]
+  (:cake (split-cake {:cake cake :spec (get-spec pieces cake)})))
 
